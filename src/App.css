@@ -1,0 +1,109 @@
+#root {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(6, 150px);
+  grid-auto-rows: 150px;
+  justify-content: center;
+  gap: 20px;
+}
+
+.container.easy {
+  grid-template-columns: repeat(4, 150px);
+}
+
+h1 {
+  font-size: 32px;
+}
+
+.difficulty-selector {
+  margin-bottom: 20px;
+}
+
+.difficulty-selector select {
+  padding: 5px;
+  font-size: 16px;
+}
+
+.game-completed {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  z-index: 1000;
+}
+
+.game-completed h1 {
+  color: #fff;
+  font-size: 60px;
+}
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate 
+that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card.active .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  border-radius: 4px;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #4d4d4d;
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: rgb(21, 24, 27);
+  color: white;
+  transform: rotateY(180deg);
+  display: grid;
+  place-items: center;
+  font-size: 50px;
+}
