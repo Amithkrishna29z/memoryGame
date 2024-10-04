@@ -7,6 +7,7 @@ const gameIcons = ["✌️", "👍", "🦷", "🦴", "😍", "😘", "😁", "�
 function App() {
   const [pieces, setPices] = useState([]);
   const [difficulty,setDifficulty]=useState("easy");
+  const [isChecking,setIsChecking]=useState(false);
 
   let timeout=useRef();
 
@@ -53,8 +54,11 @@ function App() {
   }, [iconsToUse]);
 
   const handleActive = (data) => {
+    if(isChecking) return;
+
     const flippedData = pieces.filter((data) => data.flipped && !data.solved);
-    if (flippedData === 2) return;
+
+    if (flippedData.length === 2) return;
     const newPieces = pieces.map((piece) => {
       if (piece.position === data.position) {
         piece.flipped = !piece.flipped;
@@ -67,6 +71,7 @@ function App() {
   const gameLogicForFlipped = () => {
     const flippedData = pieces.filter((data) => data.flipped && !data.solved);
     if (flippedData.length === 2) {
+      setIsChecking(true);
     timeout.current=setTimeout(() => {
         setPices(
           pieces.map((data) => {
@@ -84,6 +89,7 @@ function App() {
               return data;
           })
         );
+        setIsChecking(false);
       }, 800);
     }
   };
